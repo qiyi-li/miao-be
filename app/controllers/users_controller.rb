@@ -1,14 +1,21 @@
 class UsersController < ApplicationController
   def create
-    user = User.new email:'lll@yyy.com', name:'小李'
+    user = Users.new  name:'gg'
     if user.save
       render json:user
-    else  
-      p 'save fail'
+    else 
+      p json:user
+      render  json:user.errors
     end
+
   end
 
   def show
-    p 'this is show'
+    user = Users.find_by_id params[:id]
+    if user
+      render json:user
+    else
+      head 404
+    end
   end
 end
