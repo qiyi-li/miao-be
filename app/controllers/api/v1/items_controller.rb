@@ -1,7 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
     def index
-        p 'index 访问了'
-        p params
         items = Item.page(params[:page]).per(params[:num])
         render json:{
             resources:items,
@@ -10,10 +8,10 @@ class Api::V1::ItemsController < ApplicationController
                 num:params[:num],
                 count:Item.count
             }
-        }
+        }, status:200
     end
     def create
-        item = Item.new amount:1
+        item = Item.new amount:params[:amount]
         if item.save
             render json:{resource:item}
 
