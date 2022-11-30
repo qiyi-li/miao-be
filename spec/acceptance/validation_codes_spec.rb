@@ -11,6 +11,9 @@ resource "验证码" do
       expect(UserMailer).to receive(:welcome_email).with(email)
       do_request
       expect(status).to eq 200
+
+      do_request
+      expect(status).to eq 429
     end
   end
 end

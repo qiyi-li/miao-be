@@ -162,8 +162,8 @@ Content-Type: application/json; charset=utf-8
 Vary: Accept
 ETag: W/&quot;7a97b9b4d758a3929b8a2be53fbe189c&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 6ba873ff-96b4-447b-b593-461e3824fc3c
-X-Runtime: 0.051621
+X-Request-Id: 1d3b6ddb-83e6-4640-8e6a-00fb5a0370db
+X-Runtime: 0.069052
 Content-Length: 10</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
@@ -171,6 +171,41 @@ Content-Length: 10</pre>
               <pre class="response body">{
   &quot;code&quot;: 0
 }</pre>
+          <h3>Request</h3>
+
+            <h4>Headers</h4>
+            <pre class="request headers">Version: HTTP/1.0
+Accept: application/json
+Content-Type: application/json
+Host: example.org
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">POST /api/v1/validation_codes</pre>
+
+
+            <h4>Body</h4>
+            <pre class="request body">{"email":"errgou@gmail.com"}</pre>
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 0
+X-Content-Type-Options: nosniff
+X-Download-Options: noopen
+X-Permitted-Cross-Domain-Policies: none
+Referrer-Policy: strict-origin-when-cross-origin
+Content-Type: text/plain; charset=utf-8
+Vary: Accept
+Cache-Control: no-cache
+X-Request-Id: 8d4d9f00-a8f1-495e-9976-4425688778c9
+X-Runtime: 0.003196
+Content-Length: 1</pre>
+            <h4>Status</h4>
+            <pre class="response status">429 Too Many Requests</pre>
+              <h4>Body</h4>
+              <pre class="response body"> </pre>
       </div>
     </div>
   </body>
