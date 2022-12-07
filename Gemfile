@@ -37,6 +37,7 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 gem 'kaminari'
+gem 'jwt'
 
 gem 'rspec_api_documentation', path: './vendor/rspec_api_documentation'
 
