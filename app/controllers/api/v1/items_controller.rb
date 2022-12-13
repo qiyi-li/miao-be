@@ -5,8 +5,8 @@ class Api::V1::ItemsController < ApplicationController
     render json: {
              resources: items,
              pager: {
-               page: params[:page],
-               num: params[:num],
+               page: params[:page] || 1,
+               num: items.default_per_page,
                count: Item.count,
              },
            }, status: 200
