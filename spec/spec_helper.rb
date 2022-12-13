@@ -1,13 +1,5 @@
 require 'rspec_api_documentation'
-module RequestTestHelper
-  def sign_in(user)
-    post '/api/v1/session', params: {email: user.email, code: '123456'}
-    json = JSON.parse response.body
-    {Authorization: "Bearer #{json['jwt']}"}
-  end
-end
 RSpec.configure do |config|
-  config.include RequestTestHelper, type: :request
   config.before(:each) do |spec|
     if spec.metadata[:type].equal? :acceptance
       header 'Accept', 'application/json'
