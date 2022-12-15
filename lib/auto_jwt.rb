@@ -14,7 +14,7 @@ class AutoJwt
     rescue JWT::ExpiredSignature
       return [401, {}, [JSON.generate({reason: 'token expired'})]]
     rescue  
-      return [777, {}, [JSON.generate({reason: 'token invalid'})]]
+      return [401, {}, [JSON.generate({reason: 'token invalid'})]]
     end
 
     env["current_user_id"] = payload[0]["user_id"] rescue nil
