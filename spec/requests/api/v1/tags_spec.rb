@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Api::V1::Tags", type: :request do
-  describe "获取标签" do
+  describe "获取标签列表" do
     it "未登录获取" do
       get "/api/v1/tags"
       expect(response).to have_http_status(401)
@@ -23,6 +23,35 @@ RSpec.describe "Api::V1::Tags", type: :request do
       json = JSON.parse(response.body)
       expect(json["resources"].size).to eq(1)
     end
+  end
+  describe "获取单个标签" do
+    it "未登录获取" do
+      user = User.create email: "1@qq.com"
+      tag = Tag.create name: "tag1", sign:'x', user_id: user.id
+      get "/api/v1/tags/#{tag.id}"
+      expect(response).to have_http_status(401)
+    end
+    it "已登录获取" do
+      user = User.create email: "1@qq.com"
+      tag = Tag.create name: "tag11111", sign:'x', user_id: user.id
+      get "/api/v1/tags/#{tag.id}", headers: user.generate_auth_header
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json["resource"]["name"]).to eq("tag11111")
+    end
+     it "已登录获取不存在的标签" do
+      user = User.create email: "1@qq.com"
+      get "/api/v1/tags/1", headers: user.generate_auth_header
+      expect(response).to have_http_status(404)
+     end
+     it "已登录获取别人的标签" do
+      user = User.create email: "1@qq.com"
+      user2 = User.create email: "2@qq.com"
+      tag = Tag.create name: "tag11111", sign:'x', user_id: user2.id
+      get "/api/v1/tags/#{tag.id}", headers: user.generate_auth_header
+      expect(response).to have_http_status(404)
+      
+     end
   end
   describe "创建标签" do
     it "未登录创建" do
