@@ -21,7 +21,7 @@ class Api::V1::ItemsController < ApplicationController
     if item.save
       render json: { resource: item }
     else
-      render json: { errors: item.errors }
+      render json: { errors: item.errors }, status: 422
     end
   end
 end
