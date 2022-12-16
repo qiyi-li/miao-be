@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>验证码 API</title>
+    <title>账目 API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>验证码 API</h1>
+      <h1>账目 API</h1>
 
       <div class="article">
-        <h2>请求发送验证码</h2>
-        <h3>POST /api/v1/validation_codes</h3>
+        <h2>统计信息（按tag_id分组）</h2>
+        <h3>GET /api/v1/items/summary</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -122,32 +122,87 @@ table th, table td {
             </thead>
             <tbody>
               <tr>
-                <td>
-                    <span class="name">email</span>
+                <td class="required">
+                    <span class="name">happened_after</span>
                 </td>
                 <td>
-                  <span class="description">Email</span>
+                  <span class="description">时间起点</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="required">
+                    <span class="name">happened_before</span>
+                </td>
+                <td>
+                  <span class="description">时间终点</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="required">
+                    <span class="name">kind</span>
+                </td>
+                <td>
+                  <span class="description">账目类型</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="required">
+                    <span class="name">group_by</span>
+                </td>
+                <td>
+                  <span class="description">分组依据</span>
                 </td>
               </tr>
             </tbody>
           </table>
 
+          <h3>Response Fields</h3>
+          <table class="response-fields table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                    <span class="name">groups</span>
+                </td>
+                <td>
+                  <span class="description">分组信息</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">total</span>
+                </td>
+                <td>
+                  <span class="description">总金额（单位：分）</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <h3>Request</h3>
 
             <h4>Headers</h4>
             <pre class="request headers">Version: HTTP/1.0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozNSwiZXhwIjoxNjcxMTg5NzY1fQ.4VptcuWXK5I7Sl3pFyGVXttTnNI7Pq6PQK7Rq9uZbFM
 Accept: application/json
 Content-Type: application/json
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">POST /api/v1/validation_codes</pre>
+          <pre class="request route highlight">GET /api/v1/items/summary?happened_after=2018-01-01&amp;happened_before=2019-01-01&amp;kind=expenses&amp;group_by=tag_id</pre>
 
+            <h4>Query Parameters</h4>
+            <pre class="request query_parameters highlight">happened_after: 2018-01-01
+happened_before: 2019-01-01
+kind: expenses
+group_by: tag_id</pre>
 
-            <h4>Body</h4>
-            <pre class="request body">{"email":"errgou@gmail.com"}</pre>
 
 
             <h3>Response</h3>
@@ -160,16 +215,30 @@ X-Permitted-Cross-Domain-Policies: none
 Referrer-Policy: strict-origin-when-cross-origin
 Content-Type: application/json; charset=utf-8
 Vary: Accept
-ETag: W/&quot;7a97b9b4d758a3929b8a2be53fbe189c&quot;
+ETag: W/&quot;c280251c4d6a0dc0b9c6381f3faecd99&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 41c5ee36-606b-4fec-b63b-33260a7fd048
-X-Runtime: 0.040532
-Content-Length: 10</pre>
+X-Request-Id: d6c4699c-3591-4bd3-9a7d-6f216a9bb532
+X-Runtime: 0.005354
+Content-Length: 105</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
               <pre class="response body">{
-  &quot;code&quot;: 0
+  &quot;groups&quot;: [
+    {
+      &quot;tag_id&quot;: 61,
+      &quot;amount&quot;: 500
+    },
+    {
+      &quot;tag_id&quot;: 59,
+      &quot;amount&quot;: 400
+    },
+    {
+      &quot;tag_id&quot;: 60,
+      &quot;amount&quot;: 300
+    }
+  ],
+  &quot;total&quot;: 600
 }</pre>
       </div>
     </div>
