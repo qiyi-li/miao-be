@@ -10,7 +10,7 @@ class AutoJwt
     header = env["HTTP_AUTHORIZATION"]
     jwt = header.split(" ")[1] rescue ""
     begin
-      payload = JWT.decode jwt, "my$ecretK3y", true, { algorithm: 'HS256' } 
+      payload = JWT.decode jwt, Rails.application.credentials.jwt_base, true, { algorithm: 'HS256' } 
     rescue JWT::ExpiredSignature
       return [401, {}, [JSON.generate({reason: 'token expired'})]]
     rescue  

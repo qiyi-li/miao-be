@@ -49,7 +49,7 @@ RSpec.describe "Api::V1::Tags", type: :request do
       user2 = User.create email: "2@qq.com"
       tag = Tag.create name: "tag11111", sign:'x', user_id: user2.id
       get "/api/v1/tags/#{tag.id}", headers: user.generate_auth_header
-      expect(response).to have_http_status(404)
+      expect(response).to have_http_status(403)
       
      end
   end

@@ -43,7 +43,7 @@ Rails.application.configure do
     port:                 587,
     domain:               'smtp.qq.com',
     user_name:            '1766794521@qq.com',
-    password:             'vljzxqnfolctbjec',# TODO 修改这个密码
+    password:             Rails.application.credentials.email_password
     authentication:       'plain',
     enable_starttls_auto: true,
     open_timeout:         10,
