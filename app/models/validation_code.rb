@@ -1,5 +1,6 @@
 class ValidationCode < ApplicationRecord
   validates :email, presence:true
+  validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 
   before_create :generate_code
   after_create :send_email
