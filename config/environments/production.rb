@@ -64,11 +64,11 @@ Rails.application.configure do
     port:                 587,
     domain:               'smtp.qq.com',
     user_name:            '1766794521@qq.com',
-    password:             Rails.application.credentials.email_password
+    password:             Rails.application.credentials.email_password,
     authentication:       'plain',
     enable_starttls_auto: true,
     open_timeout:         10,
-    read_timeout:         10 
+    read_timeout:         10
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
